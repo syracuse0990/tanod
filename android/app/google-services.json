@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743016317630",
+    "project_id": "tanod-tractor",
+    "storage_bucket": "tanod-tractor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743016317630:android:79f46944b1e5c79b7f54ef",
+        "android_client_info": {
+          "package_name": "com.tanod.tractor.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa2hMnCHGnpJQf38iruuleLqrBDlbZUOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
