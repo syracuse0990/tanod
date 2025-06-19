@@ -1,9 +1,10 @@
 class APIEndpoint {
-  static String get local => 'http://192.168.2.42:8005/api/user/';
+  static String get local => 'https://tanodtractor.com/api/user/';
 
- // static String get remote => 'https://tanod-tractor.iapplabz.co.in/api/user/';
+  // static String get remote => 'https://tanod-tractor.iapplabz.co.in/api/user/';
   //static String get remote => 'https://tanodtractor.com/api/user/';
-  static String get remote => 'https://tanod-tractor-demo.iapplabz.co.in/api/user/';
+  static String get remote =>
+      'https://tanod-tractor-demo.iapplabz.co.in/api/user/';
 
   static String get localImageUrl => 'http://192.168.2.34:8003/storage/';
 
@@ -77,7 +78,6 @@ class APIEndpoint {
 
   static String get logoutApiUrl => "logout";
 
-
   static String get forgotPasswordUrl => "forgot-password";
 
   static String get issueList => "issue-type-list";
@@ -130,8 +130,6 @@ class APIEndpoint {
   static String get maintenanceTractorList => "maintenance-tractor-list";
   static String get geoFenceImeiData => "geo-fence-imei-data";
 
-
-
   static String get maintenanceFilter => "filter";
 
   static String get userList => "user-list";
@@ -158,7 +156,6 @@ class APIEndpoint {
   static String get exportTractorReport => "export-report";
   static String get exportTractorReportExits => "download-report";
 
-
   //todo for sub admin
   static String get createSubAdmin => "create-sub-admin";
   static String get updateSubAdmin => "update-sub-admin";
@@ -175,10 +172,6 @@ class APIEndpoint {
   // new api for home screen
   static String get homeDeviceAPI => "getDevices";
   static String get deviceTrackApi => "device-track-data";
-
-
-
-
 
   static int userRole = 2;
   static int aminRole = 0;
@@ -201,18 +194,15 @@ class APIEndpoint {
   static int statesCompleted = 4;
   static int statesCancelled = 5;
 
-
   static int male = 0;
   static int female = 1;
 
   static int termsAndCondition = 1;
   static int privacyPolicy = 2;
 
-
   static var typeMaintenance = "1";
   static var typeEnterGeoFence = "2";
   static var typeExitGeofence = "3";
-
 
   static var exportTractors = 1;
   static var exportFeedback = 2;
@@ -222,7 +212,7 @@ class APIEndpoint {
   static var assignToSubAdmin = 1;
   static var unAssignToSubAdmin = 2;
 
-   // ignore: non_constant_identifier_names
+  // ignore: non_constant_identifier_names
   static var ACC_OFF = 1001;
   // ignore: non_constant_identifier_names
   static var ACC_ON = 1002;
@@ -230,7 +220,4 @@ class APIEndpoint {
   static var GEOZONE_IN = 1006;
   // ignore: non_constant_identifier_names
   static var GEOZONE_OUT = 1007;
-
-
-
 }

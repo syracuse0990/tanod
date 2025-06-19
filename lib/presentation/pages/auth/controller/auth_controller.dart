@@ -103,11 +103,11 @@ class AuthController extends GetxController with BaseController {
     } else {
       showSplash(false);
     }
-    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        handleError(NoInternetException('No Internet connection'), () {});
-      }
-    });
+    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     handleError(NoInternetException('No Internet connection'), () {});
+    //   }
+    // });
     getRememberMe();
   }
 
@@ -387,28 +387,25 @@ class AuthController extends GetxController with BaseController {
   }
 
   clearAllFields() {
-   // emailC.clear();
+    // emailC.clear();
     nameC.clear();
     otpC.clear();
-    passwordLoginC.text=passwordC.text;
+    passwordLoginC.text = passwordC.text;
     print("check all data ${passwordLoginC.text} and ${emailC.text}");
     //passwordC.clear();
     comfirmPasswordC.clear();
     update();
   }
 
-
   closeTimer() {
     if (countDownTimer != null) {
       countDownTimer?.cancel();
-
     }
     phoneController.clear();
-    showPinView.value=false;
+    showPinView.value = false;
     seconds.value = 30;
     showPinView.refresh();
     seconds.refresh();
-
   }
 
   @override
