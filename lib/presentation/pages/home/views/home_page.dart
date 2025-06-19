@@ -24,9 +24,7 @@ class HomePage extends GetView<HomeController> {
                 SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                   controller.iMapRepository = Get.put(RemoteIMapProvider());
 
-                  if (box.read(tokenKeys) != null) {
-
-                  }
+                  if (box.read(tokenKeys) != null) {}
                 });
                 //}
 

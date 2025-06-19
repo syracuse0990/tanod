@@ -6,7 +6,7 @@ class APIEndpoint {
   static String get remote =>
       'https://tanod-tractor-demo.iapplabz.co.in/api/user/';
 
-  static String get localImageUrl => 'http://192.168.2.34:8003/storage/';
+  static String get localImageUrl => 'https://tanodtractor.com/storage/';
 
   static String get remoteImageUrl => 'https://tanodtractor.com/storage/';
 

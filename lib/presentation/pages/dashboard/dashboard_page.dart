@@ -18,11 +18,11 @@ class DashBoardPage extends GetView<DashboardController> {
     MapHomeScreen(),
     ListPage(),
 
-  //  SizedBox(),
-   // ListPage(),
-   AlertView(),
-   // const MaintenancePageView(),
-   ProfilePage(),
+    //  SizedBox(),
+    // ListPage(),
+    AlertView(),
+    // const MaintenancePageView(),
+    ProfilePage(),
   ];
 
   final RxInt _selectedIndex = 0.obs;
@@ -108,12 +108,12 @@ class DashBoardPage extends GetView<DashboardController> {
                       label: 'Profile'),
                 ],
                 currentIndex: _selectedIndex.value,
-            onTap: (index) {
-                _selectedIndex.value = index;
-                if(_selectedIndex.value==3){
-                  Get.lazyPut(()=>ProfileController());
-                }
-              },
+                onTap: (index) {
+                  _selectedIndex.value = index;
+                  if (_selectedIndex.value == 3) {
+                    Get.lazyPut(() => ProfileController());
+                  }
+                },
               ),
             )),
       ),
