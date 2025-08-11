@@ -1,7 +1,16 @@
-import 'package:tanod_tractor/app/util/export_file.dart';
+import 'dart:convert';
 
-class AddDeviceController extends GetxController {
-  final imei = TextEditingController();
+import 'package:dio/src/dio.dart';
+import 'package:tanod_tractor/app/util/export_file.dart';
+import 'package:tanod_tractor/data/models/devices_list_model.dart';
+import 'package:tanod_tractor/data/providers/network/dio_base_provider.dart';
+import 'package:tanod_tractor/data/providers/network/dio_exceptions.dart';
+
+abstract class AddDeviceController extends GetxController implements DioBaseProvider {
+  // final imei = TextEditingController();
+  late Dio dio;
+  final RxList<Device> deviceList = <Device>[].obs;
+  String? imei; 
   final deviceModal = TextEditingController();
   final deviceName = TextEditingController();
   final salesTime = TextEditingController();
@@ -22,7 +31,7 @@ class AddDeviceController extends GetxController {
 
   @override
   void onClose() {
-    imei.dispose();
+    // imei.dispose();
     deviceModal.dispose();
     deviceName.dispose();
     salesTime.dispose();
@@ -38,10 +47,27 @@ class AddDeviceController extends GetxController {
     remark.dispose();
   }
 
+    @override
+  void onInit() {
+    getDeviceLists();
+    super.onInit();
+  }
+
+ Future<void> getDeviceLists({Map<String, dynamic>? map}) async {
+    try {
+      var response = await dio.get(APIEndpoint.deviceList, data: map != null ? jsonEncode(map) : null);
+      var deviceResponse = DeviceResponse.fromJson(response.data);
+      deviceList.assignAll(deviceResponse.data.devices); // This will trigger updates
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
+  }
+
   addDevice() async {
     GetConnect connect = GetConnect();
     var body = {
-      "imei": imei.text,
+      "imei": imei,
       "device_modal": deviceModal.text,
       "device_name": deviceName.text,
       "sales_time": salesTime.text,
@@ -62,4 +88,5 @@ class AddDeviceController extends GetxController {
     };
     // submit
   }
+
 }

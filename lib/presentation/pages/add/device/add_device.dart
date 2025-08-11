@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tanod_tractor/app/util/export_file.dart';
+import 'package:tanod_tractor/data/models/devices_list_model.dart';
+import 'package:tanod_tractor/presentation/components/tractor_dropdown.dart';
 import 'package:tanod_tractor/presentation/components/tractor_textfeild.dart';
 import 'package:tanod_tractor/presentation/pages/add/device/controller/add_device_controller.dart';
 
@@ -46,10 +48,22 @@ class AddDevice extends GetView<AddDeviceController> {
               SizedBox(
                 height: 10.h,
               ),
-              TractorTextfeild(
-                controller: controller.imei,
-                hint: "IMEI No.",
+              
+             TractorDropdown<Device>(
+                hint: "Search IMEI No.",
+                items: controller.deviceList, // Pass the observable list directly
+                displayItem: (item) => item.imeiNo,
+                onChanged: (selectedDevice) {
+                  controller.imei = selectedDevice?.imeiNo;
+                  // Optionally, auto-fill other fields
+                  if (selectedDevice != null) {
+                    controller.deviceModal.text = selectedDevice.deviceModal ?? '';
+                    controller.deviceName.text = selectedDevice.deviceName;
+                    // ... other fields ...
+                  }
+                },
               ),
+           
               SizedBox(
                 height: 16.h,
               ),
@@ -152,4 +166,11 @@ class AddDevice extends GetView<AddDeviceController> {
       ),
     );
   }
+}
+class Product {
+  final String id;
+  final String name;
+  final double price;
+  
+  Product(this.id, this.name, this.price);
 }

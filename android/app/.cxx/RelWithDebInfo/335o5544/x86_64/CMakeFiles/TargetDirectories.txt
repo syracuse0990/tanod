@@ -1,0 +1,2 @@
+C:/Users/Dexter Castillo/Documents/mobile/tanod/android/app/.cxx/RelWithDebInfo/335o5544/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Dexter Castillo/Documents/mobile/tanod/android/app/.cxx/RelWithDebInfo/335o5544/x86_64/CMakeFiles/rebuild_cache.dir

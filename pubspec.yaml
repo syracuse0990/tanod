@@ -63,6 +63,7 @@ dependencies:
   flutter_seekbar: ^1.0.1
   file_picker: ^9.2.3
   calendar_date_picker2:
+  dropdown_search: ^6.0.2
 
 
 dev_dependencies:

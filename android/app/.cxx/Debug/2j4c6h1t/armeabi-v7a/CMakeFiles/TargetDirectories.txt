@@ -1,0 +1,2 @@
+C:/Users/Dexter Castillo/Documents/mobile/tanod/android/app/.cxx/Debug/2j4c6h1t/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Dexter Castillo/Documents/mobile/tanod/android/app/.cxx/Debug/2j4c6h1t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

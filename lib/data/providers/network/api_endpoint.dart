@@ -2,9 +2,9 @@ class APIEndpoint {
   static String get local => 'https://tanodtractor.com/api/user/';
 
   // static String get remote => 'https://tanod-tractor.iapplabz.co.in/api/user/';
-  //static String get remote => 'https://tanodtractor.com/api/user/';
-  static String get remote =>
-      'https://tanod-tractor-demo.iapplabz.co.in/api/user/';
+ static String get remote => 'https://tanodtractor.com/api/user/';
+  // static String get remote =>
+  //     'https://tanod-tractor-demo.iapplabz.co.in/api/user/';
 
   static String get localImageUrl => 'https://tanodtractor.com/storage/';
 
@@ -26,6 +26,8 @@ class APIEndpoint {
   static String get groupList => "group-list";
 
   static String get deviceList => "device-list";
+
+  static String get deviceLists => "device-lists";
 
   static String get userDetail => "details";
 
