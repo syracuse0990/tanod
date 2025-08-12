@@ -6,7 +6,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../app/util/export_file.dart';
 
-abstract class DioBaseProvider {
+abstract class DioBaseProvider extends GetxController{
   final dio = Dio();
   Duration timezone = DateTime.now().timeZoneOffset;
 

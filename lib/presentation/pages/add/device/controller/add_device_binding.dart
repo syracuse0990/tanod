@@ -2,9 +2,9 @@ import 'package:tanod_tractor/presentation/pages/add/device/controller/add_devic
 
 import '../../../../../app/util/export_file.dart';
 
-// class AddDeviceBinding extends Bindings {
-//   @override
-//   void dependencies() {
-//     Get.lazyPut(() => AddDeviceController());
-//   }
-// }
+class AddDeviceBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => AddDeviceController());
+  }
+}

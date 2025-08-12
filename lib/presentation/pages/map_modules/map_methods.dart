@@ -118,94 +118,100 @@ class MapMethods {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              Visibility(
+                visible: false,
+                child:SizedBox(
                 height: 30.h,
               ),
-              GestureDetector(
-                onTap: () {
-                  String? selectedType = "Device";
-
-                  Get.bottomSheet(
-                    Wrap(
-                      children: [
-                        Container(
-                          width: Get.width,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Select Type",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(height: 10),
-                              StatefulBuilder(
-                                builder: (context, setState) {
-                                  return DropdownButtonFormField<String>(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey),
+              ),
+              Visibility(
+                visible: false,
+                child: GestureDetector(
+                  onTap: () {
+                    String? selectedType = "Device";
+                
+                    Get.bottomSheet(
+                      Wrap(
+                        children: [
+                          Container(
+                            width: Get.width,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.vertical(top: Radius.circular(20)),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Select Type",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(height: 10),
+                                StatefulBuilder(
+                                  builder: (context, setState) {
+                                    return DropdownButtonFormField<String>(
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: AppColors.primary, width: 2),
+                                        ),
+                                        contentPadding:
+                                            EdgeInsets.symmetric(horizontal: 12),
                                       ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: AppColors.primary, width: 2),
-                                      ),
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 12),
-                                    ),
-                                    hint: Text("Choose an option"),
-                                    value: selectedType,
-                                    items: ['Device', 'Tractor'].map((item) {
-                                      return DropdownMenuItem(
-                                          value: item, child: Text(item));
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedType = value;
-                                      });
-                                      print('Selected: $value');
-                                    },
-                                  );
-                                },
-                              ),
-                              SizedBox(height: 10),
-                              TractorButton(
-                                onTap: () {
-                                  if (selectedType != null) {
-                                    Get.back(); // Close bottom sheet
-                                    if (selectedType == "Device") {
-                                      Get.to(() => AddDevice(),
-                                          binding: AddDeviceBinding());
+                                      hint: Text("Choose an option"),
+                                      value: selectedType,
+                                      items: ['Device', 'Tractor'].map((item) {
+                                        return DropdownMenuItem(
+                                            value: item, child: Text(item));
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedType = value;
+                                        });
+                                        print('Selected: $value');
+                                      },
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 10),
+                                TractorButton(
+                                  onTap: () {
+                                    if (selectedType != null) {
+                                      Get.back(); // Close bottom sheet
+                                      if (selectedType == "Device") {
+                                        Get.to(() => AddDevice(),
+                                            binding: AddDeviceBinding());
+                                      } else {
+                                        Get.to(() => AddTraktor(),
+                                            binding: AddTraktorBinding());
+                                      }
                                     } else {
-                                      Get.to(() => AddTraktor(),
-                                          binding: AddTraktorBinding());
+                                      Get.snackbar("Error",
+                                          "Please select an option first");
                                     }
-                                  } else {
-                                    Get.snackbar("Error",
-                                        "Please select an option first");
-                                  }
-                                },
-                              ),
-                            ],
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                  );
-                },
-                child: Icon(
-                  Icons.add_circle_rounded,
-                  size: 50,
-                  color: Colors.white,
+                        ],
+                      ),
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                    );
+                  },
+                  child: Icon(
+                    Icons.add_circle_rounded,
+                    size: 50,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],

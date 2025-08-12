@@ -59,7 +59,10 @@ class AddDevice extends GetView<AddDeviceController> {
                   if (selectedDevice != null) {
                     controller.deviceModal.text = selectedDevice.deviceModal ?? '';
                     controller.deviceName.text = selectedDevice.deviceName;
-                    // ... other fields ...
+                    controller.salesTime.text = selectedDevice.salesTime;
+                    controller.subscriptionExpiration.text = selectedDevice.subscriptionExpiration!;
+                    controller.mcType.text = selectedDevice.mcType!;
+                    
                   }
                 },
               ),

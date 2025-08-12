@@ -6,9 +6,8 @@ import 'package:tanod_tractor/data/models/devices_list_model.dart';
 import 'package:tanod_tractor/data/providers/network/dio_base_provider.dart';
 import 'package:tanod_tractor/data/providers/network/dio_exceptions.dart';
 
-abstract class AddDeviceController extends GetxController implements DioBaseProvider {
+class AddDeviceController extends DioBaseProvider   {
   // final imei = TextEditingController();
-  late Dio dio;
   final RxList<Device> deviceList = <Device>[].obs;
   String? imei; 
   final deviceModal = TextEditingController();
@@ -47,17 +46,20 @@ abstract class AddDeviceController extends GetxController implements DioBaseProv
     remark.dispose();
   }
 
-    @override
+
+  @override
   void onInit() {
-    getDeviceLists();
     super.onInit();
+    getDeviceLists(); // Load devices when controller is initialized
   }
+
+ 
 
  Future<void> getDeviceLists({Map<String, dynamic>? map}) async {
     try {
-      var response = await dio.get(APIEndpoint.deviceList, data: map != null ? jsonEncode(map) : null);
+      var response = await dio.post(APIEndpoint.deviceLists, data: map != null ? jsonEncode(map) : null);
       var deviceResponse = DeviceResponse.fromJson(response.data);
-      deviceList.assignAll(deviceResponse.data.devices); // This will trigger updates
+      deviceList.assignAll(deviceResponse.data.devices); 
     } catch (e) {
       showToast(message: NetworkExceptions.getDioException(e));
       rethrow;
