@@ -121,11 +121,11 @@ class MapMethods {
               Visibility(
                 visible: false,
                 child:SizedBox(
-                height: 30.h,
+                height: 20.h,
               ),
               ),
               Visibility(
-                visible: false,
+                visible: false,// box.read(roleType) == APIEndpoint.technicianRole,
                 child: GestureDetector(
                   onTap: () {
                     String? selectedType = "Device";
@@ -136,7 +136,7 @@ class MapMethods {
                           Container(
                             width: Get.width,
                             padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
+                                horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
@@ -145,7 +145,7 @@ class MapMethods {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Select Type",
+                                Text("Add New",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold)),

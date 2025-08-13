@@ -91,9 +91,9 @@ class TractorTileView extends StatelessWidget {
           ),
           isFromMaintenance == true
               ? SizedBox()
-              : isAdmin == true
+              : isAdmin == true 
                   ? showDetailMenuOnly()
-                  :             box.read(roleType) == APIEndpoint.aminRole|| box.read(roleType) == APIEndpoint.subAdminRole
+                  :             box.read(roleType) == APIEndpoint.aminRole|| box.read(roleType) == APIEndpoint.subAdminRole || box.read(roleType) == APIEndpoint.technicianRole
 
               ? showPopUpMenuButton()
                       : SizedBox(),

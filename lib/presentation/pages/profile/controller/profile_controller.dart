@@ -164,6 +164,47 @@ class ProfileController extends GetxController with BaseController {
               },
             ));
           }));
+
+    }else if(box.read(roleType) == APIEndpoint.technicianRole) {
+      profileTiles.add(SettingTileModel(
+          icon: AppSvgAssets.maintenance,
+          title: AppStrings.maintenance,
+          onTab: () {
+            Get.toNamed(RoutePage.maintenance);
+          }));
+      profileTiles.add(SettingTileModel(
+          onTab: () {
+            Get.toNamed(RoutePage.geofence);
+          },
+          icon: AppSvgAssets.geoFence,
+          title: AppStrings.geoFence));
+
+      profileTiles.add(SettingTileModel(
+          isIcon: true,
+          onTab: () {
+            Get.toNamed(RoutePage.commonDeviceView);
+          },
+          icon: AppPngAssets.devices,
+          title: AppStrings.devices));
+
+      profileTiles.add(SettingTileModel(
+          onTab: () {
+            Get.toNamed(RoutePage.commonTractorView);
+          },
+          isIcon: true,
+          icon: AppPngAssets.tractors,
+          title: AppStrings.tractors));
+      profileTiles.add(SettingTileModel(
+          icon: AppSvgAssets.logout,
+          title: 'Logout',
+          onTab: () {
+            Get.dialog(LogoutDialog(
+              onLogout: () {
+                hitApiToLogoutUser();
+              },
+            ));
+          }));
+        
     } else {
       /* profileTiles.add(SettingTileModel(
           icon: AppSvgAssets.geoFence,

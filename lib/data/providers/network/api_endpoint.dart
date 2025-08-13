@@ -28,6 +28,8 @@ class APIEndpoint {
   static String get deviceList => "device-list";
 
   static String get deviceLists => "device-lists";
+  static String get farmerLists => "farmers";
+  
 
   static String get userDetail => "details";
 
@@ -126,6 +128,8 @@ class APIEndpoint {
 
   static String get addMaintenanceConclusion => "update-conclusion";
 
+    static String get addTractor => "add-tractor";
+
   //admin can send conclusion to farmer
   static String get conclusion => "conclusion";
 
@@ -178,6 +182,7 @@ class APIEndpoint {
   static int userRole = 2;
   static int aminRole = 0;
   static int subAdminRole = 3;
+  static int technicianRole = 4;
 
   static int stateAccepted = 3;
   static int stateCompleted = 2;

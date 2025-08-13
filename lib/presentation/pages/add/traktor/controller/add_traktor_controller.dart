@@ -1,11 +1,16 @@
+import 'dart:convert';
+
 import 'package:tanod_tractor/app/util/export_file.dart';
+import 'package:tanod_tractor/data/models/farmers_model.dart';
+import 'package:tanod_tractor/data/providers/network/dio_base_provider.dart';
+import 'package:tanod_tractor/data/providers/network/dio_exceptions.dart';
 
-class AddTraktorController extends GetxController {
+class AddTraktorController extends DioBaseProvider {
   final formKey = GlobalKey<FormState>();
-
+final RxList<Farmer> farmerList = <Farmer>[].obs;
+  int role_id = 0;
   final driverId = TextEditingController();
   final deviceId = TextEditingController();
-  final groupId = TextEditingController();
   final imei = TextEditingController();
   final noPlate = TextEditingController();
   final idNo = TextEditingController();
@@ -32,19 +37,30 @@ class AddTraktorController extends GetxController {
   final frontLoaderSn = TextEditingController();
   final rotaryTillerSn = TextEditingController();
   final rotatingDiscPlowSn = TextEditingController();
-  final stateId = TextEditingController();
-  final typeId = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
+    getFarmers();
+  }
+
+ 
+
+ Future<void> getFarmers({Map<String, dynamic>? map}) async {
+    try {
+      var response = await dio.get(APIEndpoint.farmerLists, data: map != null ? jsonEncode(map) : null);
+      var farmerResponse = FarmersResponse.fromJson(response.data);
+      farmerList.assignAll(farmerResponse.data); 
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
   }
 
   @override
   void onClose() {
     driverId.dispose();
     deviceId.dispose();
-    groupId.dispose();
     imei.dispose();
     noPlate.dispose();
     idNo.dispose();
@@ -71,8 +87,6 @@ class AddTraktorController extends GetxController {
     frontLoaderSn.dispose();
     rotaryTillerSn.dispose();
     rotatingDiscPlowSn.dispose();
-    stateId.dispose();
-    typeId.dispose();
     super.onClose();
   }
 
@@ -81,7 +95,6 @@ class AddTraktorController extends GetxController {
     var body = {
       "driver_id": driverId.text,
       "device_id": deviceId.text,
-      "group_id": groupId.text,
       "imei": imei.text,
       "no_plate": noPlate.text,
       "id_no": idNo.text,
@@ -108,9 +121,17 @@ class AddTraktorController extends GetxController {
       "front_loader_sn": frontLoaderSn.text,
       "rotary_tiller_sn": rotaryTillerSn.text,
       "rotating_disc_plow_sn": rotatingDiscPlowSn.text,
-      "state_id": stateId.text,
-      "type_id": typeId.text
+      "state_id": 1,
+      "type_id": 0,
     };
+
+     try {
+        var response = await dio.post(APIEndpoint.addTractor, data: body);
+        print(response);
+      } catch (e) {
+        showToast(message: NetworkExceptions.getDioException(e));
+        rethrow;
+      }
 
     // submit
   }

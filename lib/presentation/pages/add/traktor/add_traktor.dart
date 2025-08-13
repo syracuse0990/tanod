@@ -3,6 +3,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tanod_tractor/data/models/devices_list_model.dart';
+import 'package:tanod_tractor/data/models/farmers_model.dart';
+import 'package:tanod_tractor/presentation/components/tractor_dropdown.dart';
 import 'package:tanod_tractor/presentation/components/tractor_textfeild.dart';
 import 'package:tanod_tractor/presentation/pages/add/traktor/controller/add_traktor_controller.dart';
 
@@ -49,168 +52,161 @@ class AddTraktor extends GetView<AddTraktorController> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
+                  TractorDropdown<Farmer>(
+                  hint: "Search Recipient",
+                  items: controller.farmerList,
+                  displayItem: (item) => item.name,
+                  onChanged: (selectedFarmer) {
+                    controller.role_id = selectedFarmer!.id;
+                   
+                  },
+                ),
+                
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.driverId,
                   hint: "Driver ID",
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.deviceId,
                   hint: "Device ID",
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.h),
-                TractorTextfeild(
-                  controller: controller.groupId,
-                  hint: "Group ID",
-                  keyboardType: TextInputType.number,
-                ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.imei,
                   hint: "IMEI",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.noPlate,
                   hint: "No Plate",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.idNo,
                   hint: "ID Number",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.engineNo,
                   hint: "Engine Number",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.fuelConsumption,
                   hint: "Fuel Consumption",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.brand,
                   hint: "Brand",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.model,
                   hint: "Model",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.manufactureDate,
                   hint: "Manufacture Date",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.installationTime,
                   hint: "Installation Time",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.installationAddress,
                   hint: "Installation Address",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.maxSpeed,
                   hint: "Max Speed",
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.maintenanceKilometer,
                   hint: "Maintenance Kilometer",
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.firstMaintenanceHr,
                   hint: "First Maintenance Hour",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.runningKm,
                   hint: "Running KM",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.totalDistance,
                   hint: "Total Distance",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.chasisNo,
                   hint: "Chasis Number",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.insuranceEffectDate,
                   hint: "Insurance Effect Date",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.insuranceExpireDate,
                   hint: "Insurance Expire Date",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.firstAlert,
                   hint: "First Alert",
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.lastAlertHours,
                   hint: "Last Alert Hours",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.drDate,
                   hint: "DR Date",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.actualDeliveryDate,
                   hint: "Actual Delivery Date",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.drNo,
                   hint: "DR Number",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.frontLoaderSn,
                   hint: "Front Loader SN",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.rotaryTillerSn,
                   hint: "Rotary Tiller SN",
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 12.h),
                 TractorTextfeild(
                   controller: controller.rotatingDiscPlowSn,
                   hint: "Rotating Disc Plow SN",
-                ),
-                SizedBox(height: 16.h),
-                TractorTextfeild(
-                  controller: controller.stateId,
-                  hint: "State ID",
-                  keyboardType: TextInputType.number,
-                ),
-                SizedBox(height: 16.h),
-                TractorTextfeild(
-                  controller: controller.typeId,
-                  hint: "Type ID",
-                  keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 25.h),
                 TractorButton(

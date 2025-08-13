@@ -17,7 +17,7 @@ class CommonDeviceView extends GetView<CommonDeviceController> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      floatingActionButton:box.read(roleType) == APIEndpoint.aminRole? FloatingActionButton(
+      floatingActionButton:box.read(roleType) == APIEndpoint.aminRole || box.read(roleType) == APIEndpoint.technicianRole? FloatingActionButton(
         child: Icon(Icons.add, color: AppColors.white),
         backgroundColor: AppColors.primary,
         onPressed: () {

@@ -55,7 +55,7 @@ class TractorDropdown<T extends Object> extends StatelessWidget {
               hintText: hint,
               focusedBorder: const UnderlineInputBorder(),
               hintStyle: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 14.sp,
                 color: AppColors.lightGray.withOpacity(0.5),
                 height: 0.0,
                 fontFamily: GoogleFonts.plusJakartaSans(
@@ -64,7 +64,7 @@ class TractorDropdown<T extends Object> extends StatelessWidget {
               ),
             ),
             style: TextStyle(
-              fontSize: 18.sp,
+              fontSize: 15.sp,
               color: AppColors.primary,
               height: 1.0,
               fontFamily: GoogleFonts.plusJakartaSans(

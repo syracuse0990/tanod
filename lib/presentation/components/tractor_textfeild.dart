@@ -13,7 +13,6 @@ class TractorTextfeild extends StatelessWidget {
   final double? height;
   final bool isSufix;
   final bool isPrefix;
-  final bool? isHint;
   final bool? obscureText;
   final Widget? countryPicker;
   final TextInputAction? textInputAction;
@@ -35,12 +34,11 @@ class TractorTextfeild extends StatelessWidget {
     this.controller,
     this.svgIcon,
     this.hint,
-    this.isVisible=false,
+    this.isVisible = false,
     this.height,
     this.isSufix = false,
     this.bgColor,
     this.isPrefix = false,
-    this.isHint = true,
     this.obscureText = false,
     this.textInputAction,
     this.keyboardType,
@@ -59,60 +57,72 @@ class TractorTextfeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 48.h,
+      height: height ?? 60.h, // Slightly taller for floating label
       child: TextFormField(
         onChanged: onChanged,
         readOnly: readOnly ?? false,
         enabled: isEnabned,
         style: TextStyle(
-          fontSize: 18.sp,
+          fontSize: 14.sp,
           color: AppColors.primary,
-          height: 1.0,
+          height: 1.2,
           fontFamily: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500)
               .fontFamily,
         ),
         inputFormatters: inputFormatters,
-        validator:(data){
-        if(onValidator!=null){
-          onValidator!(data!);
-        }
+        validator: (data) {
+          if (onValidator != null) {
+            onValidator!(data ?? '');
+          }
+          return null;
         },
         textAlign: TextAlign.justify,
         obscureText: obscureText!,
         textInputAction: textInputAction ?? TextInputAction.done,
-        decoration: InputDecoration(
-            suffixIcon: isSufix
-                ? GestureDetector(
-                    onTap: onSufixTap ?? () {},
-                    child: suffixWidget??Container(
-                      margin: EdgeInsets.only(right: 15.w),
-                      padding: EdgeInsets.all(8.r),
-                      child: isVisible==false
-                          ? Icon(
-                              Icons.visibility_off,
-                              color: AppColors.primary,
-                              size: 25.r,
-                            )
-                          : Icon(
-                              Icons.visibility,
-                              color: AppColors.primary,
-                              size: 25.r,
-                            ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            hintText: hint,
-            focusedBorder: const UnderlineInputBorder(),
-            hintStyle: TextStyle(
-              fontSize: 15.sp,
-              color: AppColors.lightGray.withOpacity(0.5),
-              height: 0.0,
-              fontFamily:
-                  GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500)
-                      .fontFamily,
-            )),
         keyboardType: keyboardType ?? TextInputType.emailAddress,
         controller: controller,
+        decoration: InputDecoration(
+          labelText: hint, // Floating label
+          labelStyle: TextStyle(
+            fontSize: 15.sp,
+            color: AppColors.lightGray.withOpacity(0.8),
+            fontFamily: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500)
+                .fontFamily,
+          ),
+          floatingLabelStyle: TextStyle(
+            fontSize: 13.sp,
+            color: AppColors.primary,
+            fontWeight: FontWeight.w600,
+          ),
+          suffixIcon: isSufix
+              ? GestureDetector(
+                  onTap: onSufixTap ?? () {},
+                  child: suffixWidget ??
+                      Container(
+                        margin: EdgeInsets.only(right: 15.w),
+                        padding: EdgeInsets.all(8.r),
+                        child: isVisible == false
+                            ? Icon(
+                                Icons.visibility_off,
+                                color: AppColors.primary,
+                                size: 25.r,
+                              )
+                            : Icon(
+                                Icons.visibility,
+                                color: AppColors.primary,
+                                size: 25.r,
+                              ),
+                      ),
+                )
+              : const SizedBox.shrink(),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: AppColors.lightGray.withOpacity(0.5), width: 1),
+          ),
+        ),
       ),
     );
   }
