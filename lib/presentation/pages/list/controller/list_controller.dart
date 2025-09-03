@@ -27,6 +27,8 @@ class ListController extends GetxController with BaseController {
   RxList<PopupMenuItem> popupList = <PopupMenuItem>[].obs;
 
   RxList<DevicesModel>? stateDeviceList = <DevicesModel>[].obs;
+  RxList<DeviceDataModel>? deviceList = <DeviceDataModel>[].obs;
+  
   List<String> tabTitles = [];
   List<String> detailTabList = ['Farmers', 'Tractors', 'Devices', 'Bookings'];
 
@@ -90,7 +92,7 @@ class ListController extends GetxController with BaseController {
       ];
     } else {
       tabTitles = [
-        'Groups',
+        'Devices',
       ];
     }
     Get.forceAppUpdate();
@@ -106,7 +108,8 @@ class ListController extends GetxController with BaseController {
       ];
     } else {
       pageList = [
-        TractorGroupsPage(),
+        // TractorGroupsPage(),
+        AllTabContentView(),
       ];
     }
     Get.forceAppUpdate();
@@ -132,6 +135,24 @@ class ListController extends GetxController with BaseController {
       if (value != null && value.data != null) {
         stateDeviceList?.addAll(value.data ?? []);
         stateDeviceList?.refresh();
+      }
+    }).onError((error, stackTrace) {
+      hideLoading();
+      showToast(message: error?.toString());
+    });
+  }
+
+   //here we get all list basesd on state
+  Future hitApiToGetDeviceListTechnician() async {
+    iHomeRepository = Get.put(RemoteIHomeProvider());
+    deviceList?.clear();
+    showLoading("Loading");
+
+    await iHomeRepository?.getAllDeviceList().then((value) {
+      hideLoading();
+      if (value != null && value.data != null) {
+        deviceList?.addAll(value.data as Iterable<DeviceDataModel>);
+        deviceList?.refresh();
       }
     }).onError((error, stackTrace) {
       hideLoading();

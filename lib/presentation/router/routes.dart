@@ -8,6 +8,7 @@ import 'package:tanod_tractor/presentation/pages/auth/controller/auth_binding.da
 import 'package:tanod_tractor/presentation/pages/auth/sign_in_page.dart';
 import 'package:tanod_tractor/presentation/pages/auth/sign_up_page.dart';
 import 'package:tanod_tractor/presentation/pages/auth/widgets/phone_verification_view.dart';
+import 'package:tanod_tractor/presentation/pages/common_modules/fca/views/fca_view.dart';
 import 'package:tanod_tractor/presentation/pages/dashboard/dashboard_page.dart';
 import 'package:tanod_tractor/presentation/pages/geofence/geofence_page.dart';
 import 'package:tanod_tractor/presentation/pages/list/tractor_groups_page.dart';
@@ -38,6 +39,7 @@ import '../pages/admin_modules/user_management/views/user_management_view.dart';
 import '../pages/alert/bindings/alert_bindings.dart';
 import '../pages/common_modules/devices/bindings/device_bindings.dart';
 import '../pages/common_modules/devices/views/common_device_view.dart';
+import '../pages/common_modules/fca/bindings/fca_bindings.dart';
 import '../pages/common_modules/tractors/bindings/tractors_bindings.dart';
 import '../pages/common_modules/tractors/views/add_new_tractor.dart';
 import '../pages/common_modules/tractors/views/common_tractor_view.dart';
@@ -194,6 +196,11 @@ appRoutes() => [
         name: RoutePage.commonTractorView,
         page: () => CommonTractorView(),
         binding: CommonTractorBindings(),
+      ),
+      GetPage(
+        name: RoutePage.assignFCA,
+        page: () => FCAView(),
+        binding: FCABindings(),
       ),
 
       GetPage(

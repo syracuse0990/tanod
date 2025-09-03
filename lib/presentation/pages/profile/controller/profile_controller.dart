@@ -186,6 +186,14 @@ class ProfileController extends GetxController with BaseController {
           },
           icon: AppPngAssets.devices,
           title: AppStrings.devices));
+      
+      profileTiles.add(SettingTileModel(
+          isIcon: true,
+          onTab: () {
+            Get.toNamed(RoutePage.assignFCA);
+          },
+          icon: AppPngAssets.userManagementImage,
+          title: 'Assign FCA'));
 
       profileTiles.add(SettingTileModel(
           onTab: () {

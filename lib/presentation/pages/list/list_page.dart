@@ -23,7 +23,7 @@ class ListPage extends StatelessWidget {
     return Scaffold(
         appBar: TractorBackArrowBar(
           leading: SizedBox(),
-          firstLabel: 'List',
+          firstLabel:  'Lists',
           firstTextStyle: TextStyle(
             fontFamily: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500)
                 .fontFamily,
@@ -66,7 +66,7 @@ class ListPage extends StatelessWidget {
                 ),
                 child: TabBar(
                   isScrollable:
-                  box.read(roleType) == APIEndpoint.aminRole|| box.read(roleType) == APIEndpoint.subAdminRole
+                  box.read(roleType) == APIEndpoint.aminRole || box.read(roleType) == APIEndpoint.subAdminRole 
                       ? false : true,
                   tabAlignment:              box.read(roleType) == APIEndpoint.aminRole|| box.read(roleType) == APIEndpoint.subAdminRole
                       ?null:TabAlignment.start,
@@ -99,7 +99,9 @@ class ListPage extends StatelessWidget {
                   }).toList(),
                   onTap: (index) {
                     controller.selectedIndex.value = index;
-
+                    if( box.read(roleType) == APIEndpoint.technicianRole){
+                       controller.hitApiToGetDeviceList(stateId: {'state': 1});
+                    }
                     if (index == 1) {
                       controller.hitApiToGetDeviceList(stateId: {'state': 1});
                     } else if (index == 2) {

@@ -26,7 +26,7 @@ class SignInFormView extends GetView<AuthController> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TractorText(text: 'Email'),
+          // const TractorText(text: 'Email'),
           TractorTextfeild(
             controller: controller.emailLoginC,
             textInputAction: TextInputAction.next,
@@ -34,7 +34,7 @@ class SignInFormView extends GetView<AuthController> {
             hint: 'Email',
           ),
           AddSpace.vertical(30.h),
-          const TractorText(text: 'Password'),
+          // const TractorText(text: 'Password'),
           Obx(
             () => TractorTextfeild(
               controller: controller.passwordLoginC,
@@ -43,7 +43,7 @@ class SignInFormView extends GetView<AuthController> {
               hint: 'Password',
 
               isSufix: true,
-              isVisible:controller.isObsureText.value  ,
+              isVisible:controller.isObsureText.value,
               obscureText:   controller.isObsureText.value ,
               onSufixTap: () {
                 controller.isObsureText.value = !controller.isObsureText.value;

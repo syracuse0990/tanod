@@ -27,6 +27,8 @@ class RoutePage {
   static const String tractorCalenderView = '/tractorCalenderView';
   static const String userManagementView = '/userManagementView';
   static const String geofence = '/geofence';
+  static const String assignFCA = '/assignFCA';
+
 
 
   //for admin
