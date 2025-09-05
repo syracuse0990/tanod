@@ -1,56 +1,89 @@
 
 
+import 'dart:convert';
+
+import 'package:intl/intl.dart';
 import 'package:tanod_tractor/app/util/export_file.dart';
+import 'package:tanod_tractor/data/models/devices_list_model.dart';
+import 'package:tanod_tractor/data/providers/network/dio_base_provider.dart';
+import 'package:tanod_tractor/data/providers/network/dio_exceptions.dart';
+import 'package:tanod_tractor/data/models/farmers_model.dart';
+import 'package:tanod_tractor/presentation/pages/common_modules/fca/models/fca_listing_model.dart';
+import 'package:tanod_tractor/presentation/pages/common_modules/fca/models/tractor_listing_model.dart';
 
-class RecipientModel {
-  final String group;
-  final String tractor;
-  final String device;
-  final String recipient;
-  final String dateTagged;
 
-  RecipientModel({
-    required this.group,
-    required this.tractor,
-    required this.device,
-    required this.recipient,
-    required this.dateTagged,
-  });
+
+String formatDate(String dateString) {
+  try {
+    DateTime parsedDate = DateTime.parse(dateString).toLocal(); 
+    return DateFormat("MM-dd-yyyy hh:mm a").format(parsedDate);
+  } catch (e) {
+    return "";
+  }
 }
+class FCAController extends DioBaseProvider {
+    var recipients = <FCAData>[].obs;
 
-class FCAController extends GetxController {
-  var recipients = <RecipientModel>[].obs;
+    final RxList<Device> deviceList = <Device>[].obs;
+    final RxList<Tractor> tractorList = <Tractor>[].obs;
+    final RxList<Farmer> farmerList = <Farmer>[].obs;
 
   @override
   void onInit() {
     super.onInit();
     print("FCAController init");
+    loadRecipientsFromApi();
+    getDeviceLists();
+    tractorListing();
+    getFarmers();
   }
 
-  void loadRecipients() {
-    // For now, test data
-    recipients.value = [
-      RecipientModel(
-        group: "Laguna",
-        tractor: "869066062212940",
-        device: "869066062212940",
-        recipient: "Paula Grace Aquino",
-        dateTagged: "2025-08-14 07:13",
-      ),
-      RecipientModel(
-        group: "Test User",
-        tractor: "869066062212940",
-        device: "869066062212940",
-        recipient: "Ronald",
-        dateTagged: "2025-08-14 07:08",
-      ),
-      RecipientModel(
-        group: "Laguna",
-        tractor: "869066062217154",
-        device: "869066062217154",
-        recipient: "Navs",
-        dateTagged: "2025-08-14 06:20",
-      ),
-    ];
+   Future<void> loadRecipientsFromApi() async {
+     try {
+      var jsonResponse = await dio.get(APIEndpoint.fcaLists);
+      var response = FCAResponse.fromJson(jsonResponse.data);
+      recipients.assignAll(response.data); 
+
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
   }
+  Future<void> tractorListing() async {
+     try {
+      var jsonResponse = await dio.get(APIEndpoint.tractorListing);
+      var response = TractorListResponse.fromJson(jsonResponse.data);
+      tractorList.assignAll(response.data); 
+
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
+  }
+
+
+  Future<void> getDeviceLists({Map<String, dynamic>? map}) async {
+    try {
+      var response = await dio.post(APIEndpoint.deviceLists, data: map != null ? jsonEncode(map) : null);
+      var deviceResponse = DeviceResponse.fromJson(response.data);
+      deviceList.assignAll(deviceResponse.data.devices); 
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
+  }
+
+   Future<void> getFarmers({Map<String, dynamic>? map}) async {
+    try {
+      var response = await dio.get(APIEndpoint.farmerLists, data: map != null ? jsonEncode(map) : null);
+      var farmerResponse = FarmersResponse.fromJson(response.data);
+      farmerList.assignAll(farmerResponse.data); 
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
+  }
+
+  
+
 }

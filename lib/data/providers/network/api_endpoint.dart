@@ -179,6 +179,9 @@ class APIEndpoint {
   static String get homeDeviceAPI => "getDevices";
   static String get deviceTrackApi => "device-track-data";
 
+   static String get fcaLists => "fca-lists";
+  static String get tractorListing => "tractor-listing";
+
   static int userRole = 2;
   static int aminRole = 0;
   static int subAdminRole = 3;
