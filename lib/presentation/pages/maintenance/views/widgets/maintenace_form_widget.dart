@@ -30,7 +30,7 @@ class MaintenanceFormWidget extends GetWidget<MaintenanceController> {
             ),
             _selectTractors,
             AddSpace.vertical(20.h),
-            const TractorText(text: AppStrings.maintenanceDates),
+            // const TractorText(text: AppStrings.maintenanceDates),
             GestureDetector(
               onTap: () async {
                 await showDateTimePicker(
@@ -71,7 +71,7 @@ class MaintenanceFormWidget extends GetWidget<MaintenanceController> {
               fontWeight: FontWeight.w600,
             ),
             AddSpace.vertical(30.h),
-            const TractorText(text: AppStrings.technicianName),
+            // const TractorText(text: AppStrings.technicianName),
             TractorTextfeild(
               controller: controller.nameController,
               textInputAction: TextInputAction.next,
@@ -79,7 +79,7 @@ class MaintenanceFormWidget extends GetWidget<MaintenanceController> {
               hint: AppStrings.technicianName,
             ),
             AddSpace.vertical(30.h),
-            const TractorText(text: AppStrings.technicianEmail),
+            // const TractorText(text: AppStrings.technicianEmail),
             TractorTextfeild(
               controller: controller.emailController,
               textInputAction: TextInputAction.next,
@@ -87,7 +87,7 @@ class MaintenanceFormWidget extends GetWidget<MaintenanceController> {
               hint: AppStrings.technicianEmail,
             ),
             AddSpace.vertical(30.h),
-            const TractorText(text: AppStrings.technicianPhoneNumber),
+            // const TractorText(text: AppStrings.technicianPhoneNumber),
             TractorTextfeild(
               controller: controller.phnNumberController,
               textInputAction: TextInputAction.next,

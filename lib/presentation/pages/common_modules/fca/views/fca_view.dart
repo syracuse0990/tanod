@@ -19,6 +19,7 @@ class FCAView extends GetView<FCAController> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: TractorBackArrowBar(
         actions: [
@@ -66,68 +67,73 @@ class FCAView extends GetView<FCAController> {
                               ),
                             ),
                             SizedBox(height: 16),
-
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                             // Search Recipient
                             TractorText(
                             text: "FCA/Recipient",
-                            fontSize: 14.sp,
+                            fontSize: 10.sp,
                             ),
                             TractorDropdown<Farmer>(
                               hint: "Search Recipient",
                               items: controller.farmerList,
                               displayItem: (item) => item.name,
                               onChanged: (selectedFarmer) {
-                                // controller.role_id = selectedFarmer!.id;
+                                controller.fcaID = selectedFarmer!.id;
+
                               },
+                              validator: (value) => value == null ? "Recipient is required" : null,
                             ),
                             SizedBox(height: 16),
 
                             // Search Device IMEI
                             TractorText(
                               text: "Device",
-                              fontSize: 14.sp,
+                               fontSize: 10.sp,
                             ),
                             TractorDropdown<Device>(
                               hint: "Search IMEI No.",
                               items: controller.deviceList,
                               displayItem: (item) => item.imeiNo,
                               onChanged: (selectedDevice) {
-                                // controller.imei = selectedDevice?.imeiNo;
-                                // if (selectedDevice != null) {
-                                //   controller.deviceModal.text = selectedDevice.deviceModal ?? '';
-                                //   controller.deviceName.text = selectedDevice.deviceName;
-                                //   controller.salesTime.text = selectedDevice.salesTime;
-                                //   controller.subscriptionExpiration.text =
-                                //       selectedDevice.subscriptionExpiration ?? '';
-                                //   controller.mcType.text = selectedDevice.mcType ?? '';
-                                // }
+                                controller.deviceID = selectedDevice!.id;
+                    
                               },
+                              validator: (value) => value == null ? "Device is required" : null,
                             ),
                             SizedBox(height: 16),
 
                             // Search Tractor
                             TractorText(
                               text: "Tractor",
-                              fontSize: 14.sp,
+                               fontSize: 10.sp,
                             ),
                             TractorDropdown<Tractor>(
                               hint: "Search Tractor",
                               items: controller.tractorList,
                               displayItem: (item) => item.tractorName,
                               onChanged: (selectedTractor) {
-                                
+                                controller.tractorID = selectedTractor!.id;
                               },
+                              validator: (value) => value == null ? "Tractor is required" : null,
                             ),
                             SizedBox(height: 20),
 
                             TractorButton(
                               fontSize: 16,
                               onTap: () async {
-                               // await controller.tagFCA();
-                                Get.back(); // close modal
+                                 if (_formKey.currentState!.validate()) {
+                                    await controller.tagFCA();
+                                    Get.back(); 
+                                  }
                               },
                               text: "Submit",
                             ),
+    ],)),
                           ],
                         ),
                       ),
@@ -155,6 +161,12 @@ class FCAView extends GetView<FCAController> {
         ),
       ),
       body: Obx(() {
+        if (controller.isLoading.value) {
+          // Show circular loader while fetching data
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         if (controller.recipients.isEmpty) {
           return Center(child: noDataFoundWidget());
         }
@@ -191,13 +203,13 @@ class FCAView extends GetView<FCAController> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.edit, size: 18, color: Colors.blueAccent),
-                      onPressed: () {
-                        // TODO: handle edit action
-                        // controller.editRecipient(item);
-                      },
-                    ),
+                    // IconButton(
+                    //   icon: Icon(Icons.edit, size: 18, color: Colors.blueAccent),
+                    //   onPressed: () {
+                    //     // TODO: handle edit action
+                    //     // controller.editRecipient(item);
+                    //   },
+                    // ),
                   ],
                 ),
                                 subtitle: Column(

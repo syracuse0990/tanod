@@ -24,14 +24,20 @@ String formatDate(String dateString) {
 class FCAController extends DioBaseProvider {
     var recipients = <FCAData>[].obs;
 
+    late int fcaID;
+    late int deviceID;
+    late int tractorID;
+    var isLoading = true.obs;
+
     final RxList<Device> deviceList = <Device>[].obs;
     final RxList<Tractor> tractorList = <Tractor>[].obs;
     final RxList<Farmer> farmerList = <Farmer>[].obs;
 
+
+
   @override
   void onInit() {
     super.onInit();
-    print("FCAController init");
     loadRecipientsFromApi();
     getDeviceLists();
     tractorListing();
@@ -39,14 +45,20 @@ class FCAController extends DioBaseProvider {
   }
 
    Future<void> loadRecipientsFromApi() async {
+    // showLoading("Loading");
+     isLoading.value = true;
      try {
       var jsonResponse = await dio.get(APIEndpoint.fcaLists);
       var response = FCAResponse.fromJson(jsonResponse.data);
       recipients.assignAll(response.data); 
-
+      
     } catch (e) {
       showToast(message: NetworkExceptions.getDioException(e));
+     
       rethrow;
+    }finally {
+        isLoading.value = false;
+      // hideLoading();
     }
   }
   Future<void> tractorListing() async {
@@ -78,6 +90,26 @@ class FCAController extends DioBaseProvider {
       var response = await dio.get(APIEndpoint.farmerLists, data: map != null ? jsonEncode(map) : null);
       var farmerResponse = FarmersResponse.fromJson(response.data);
       farmerList.assignAll(farmerResponse.data); 
+    } catch (e) {
+      showToast(message: NetworkExceptions.getDioException(e));
+      rethrow;
+    }
+  }
+
+  Future<void> tagFCA() async{
+    var body = {
+      "fca_id": fcaID,
+      "device_id": deviceID,
+      "tractor_id": tractorID,
+    };
+
+   
+
+    try {
+      var response = await dio.post(APIEndpoint.tagNewFCA, data:  jsonEncode(body) );
+
+      showToast(message: "FCA has been tagged successfully.");
+      loadRecipientsFromApi();
     } catch (e) {
       showToast(message: NetworkExceptions.getDioException(e));
       rethrow;

@@ -13,6 +13,7 @@ class TractorDropdown<T extends Object> extends StatelessWidget {
   final T? value;
   final Function(T?)? onChanged;
   final bool isEnabled;
+  final String? Function(T?)? validator; // 👈 Add validator
 
   const TractorDropdown({
     super.key,
@@ -23,61 +24,65 @@ class TractorDropdown<T extends Object> extends StatelessWidget {
     this.value,
     this.onChanged,
     this.isEnabled = true,
+    this.validator, // 👈
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height ?? 48.h,
-      child: Autocomplete<T>(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-          // Create a local typed list to ensure type safety
-          final List<T> filteredItems = List<T>.from(items);
-          
-          if (textEditingValue.text.isEmpty) {
-            return filteredItems;
-          }
-          return filteredItems.where((T item) {
-            final displayValue = displayItem != null ? displayItem!(item) : item.toString();
-            return displayValue.toLowerCase().contains(textEditingValue.text.toLowerCase());
-          });
-        },
-        displayStringForOption: (T option) => displayItem != null ? displayItem!(option) : option.toString(),
-        fieldViewBuilder: (BuildContext context, 
-            TextEditingController textEditingController, 
-            FocusNode focusNode, 
-            VoidCallback onFieldSubmitted) {
-          return TextFormField(
-            controller: textEditingController,
-            focusNode: focusNode,
-            enabled: isEnabled,
-            decoration: InputDecoration(
-              hintText: hint,
-              focusedBorder: const UnderlineInputBorder(),
-              hintStyle: TextStyle(
-                fontSize: 14.sp,
-                color: AppColors.lightGray.withOpacity(0.5),
-                height: 0.0,
-                fontFamily: GoogleFonts.plusJakartaSans(
-                  fontWeight: FontWeight.w500,
-                ).fontFamily,
+    return FormField<T>(
+      validator: validator, // 👈 Hook validator
+      initialValue: value,
+      builder: (state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: height ?? 48.h,
+              child: Autocomplete<T>(
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  final List<T> filteredItems = List<T>.from(items);
+
+                  if (textEditingValue.text.isEmpty) {
+                    return filteredItems;
+                  }
+                  return filteredItems.where((T item) {
+                    final displayValue = displayItem != null
+                        ? displayItem!(item)
+                        : item.toString();
+                    return displayValue
+                        .toLowerCase()
+                        .contains(textEditingValue.text.toLowerCase());
+                  });
+                },
+                displayStringForOption: (T option) =>
+                    displayItem != null ? displayItem!(option) : option.toString(),
+                fieldViewBuilder: (context, textEditingController, focusNode, _) {
+                  return TextFormField(
+                    controller: textEditingController,
+                    focusNode: focusNode,
+                    enabled: isEnabled,
+                    decoration: InputDecoration(
+                      hintText: hint,
+                      errorText: state.errorText, // 👈 show error message
+                    ),
+                  );
+                },
+                onSelected: (selected) {
+                  state.didChange(selected); // 👈 updates form state
+                  if (onChanged != null) onChanged!(selected);
+                },
+                initialValue: value != null
+                    ? TextEditingValue(
+                        text: displayItem != null
+                            ? displayItem!(value!)
+                            : value.toString(),
+                      )
+                    : null,
               ),
             ),
-            style: TextStyle(
-              fontSize: 15.sp,
-              color: AppColors.primary,
-              height: 1.0,
-              fontFamily: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.w500,
-              ).fontFamily,
-            ),
-          );
-        },
-        onSelected: onChanged,
-        initialValue: value != null 
-            ? TextEditingValue(text: displayItem != null ? displayItem!(value!) : value.toString())
-            : null,
-      ),
+          ],
+        );
+      },
     );
   }
 }

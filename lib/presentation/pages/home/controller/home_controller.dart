@@ -86,7 +86,7 @@ class HomeController extends GetxController with BaseController {
       final status = await Geolocator.requestPermission();
       if (status == LocationPermission.denied ||
           status == LocationPermission.deniedForever) return;
-      showLoading("Loading");
+      // showLoading("Loading");
       final position = await Geolocator.getCurrentPosition();
       if (position != null) {
         kGooglePlex.value = CameraPosition(
@@ -101,7 +101,7 @@ class HomeController extends GetxController with BaseController {
         )));
         kGooglePlex.refresh();
       }
-      print("cehck all ${position?.toString()}");
+   
     } catch (e) {
       hideLoading();
     } finally {
