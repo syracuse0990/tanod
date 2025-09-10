@@ -90,9 +90,7 @@ class SimpleMarkerAnimationExampleState
        });
      }catch(e){
        print("check all exceptions ${e}");
-       setState(() {
-         isLoading = false;
-       });
+       setState(() => isLoading = false);
      }
 
   }

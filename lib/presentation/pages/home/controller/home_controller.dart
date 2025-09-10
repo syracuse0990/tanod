@@ -103,9 +103,9 @@ class HomeController extends GetxController with BaseController {
       }
    
     } catch (e) {
-      hideLoading();
+      // hideLoading();
     } finally {
-      hideLoading();
+      // hideLoading();
     }
   }
 

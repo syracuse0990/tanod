@@ -14,11 +14,10 @@ class TicketView extends GetView<TicketController> {
           child: Icon(Icons.add,color: AppColors.white,),
           backgroundColor: AppColors.primary,
           onPressed: () {
-            // controller.clearAllFields();
-            // controller.isUpdating.value=false;
-            Get.to(AddUpdateTicketView(
+            Get.to(() => AddUpdateTicketView(
               isUpdating: false,
             ));
+  
           },
         ),
         appBar: TractorBackArrowBar(
@@ -33,19 +32,7 @@ class TicketView extends GetView<TicketController> {
         ),
         body: Column(
           children: [
-            Expanded(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: () {
-
-                          },
-                          child: TicketTileView(
-
-                          ));
-                    }))
+            TicketListView()
           ],
         ));
   }

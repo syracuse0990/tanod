@@ -26,7 +26,7 @@ class SignUpFormView extends GetWidget<AuthController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AddSpace.vertical(30.h),
-          const TractorText(text: 'Name'),
+          // const TractorText(text: 'Name'),
           TractorTextfeild(
             controller: controller.nameC,
             textInputAction: TextInputAction.next,
@@ -36,7 +36,7 @@ class SignUpFormView extends GetWidget<AuthController> {
             hint: 'Name',
           ),
           AddSpace.vertical(30.h),
-          const TractorText(text: 'Email'),
+          // const TractorText(text: 'Email'),
           TractorTextfeild(
             controller: controller.emailC,
             textInputAction: TextInputAction.next,
@@ -52,18 +52,18 @@ class SignUpFormView extends GetWidget<AuthController> {
             },
             hint: 'Email',
           ),
+          // AddSpace.vertical(30.h),
+          // const TractorText(
+          //   text: 'Verification Code',
+          // ),
+          // TractorTextfeild(
+          //   controller: controller.otpC,
+          //   textInputAction: TextInputAction.next,
+          //   keyboardType: TextInputType.emailAddress,
+          //   hint: 'Verification Code',
+          // ),
           AddSpace.vertical(30.h),
-          const TractorText(
-            text: 'Verification Code',
-          ),
-          TractorTextfeild(
-            controller: controller.otpC,
-            textInputAction: TextInputAction.next,
-            keyboardType: TextInputType.emailAddress,
-            hint: 'Verification Code',
-          ),
-          AddSpace.vertical(30.h),
-          const TractorText(text: 'Password'),
+          // const TractorText(text: 'Password'),
           Obx(
             () => TractorTextfeild(
               controller: controller.passwordC,
@@ -80,7 +80,7 @@ class SignUpFormView extends GetWidget<AuthController> {
             ),
           ),
           AddSpace.vertical(30.h),
-          const TractorText(text: 'Confirm Password'),
+          // const TractorText(text: 'Confirm Password'),
           Obx(
             () => TractorTextfeild(
               controller: controller.comfirmPasswordC,

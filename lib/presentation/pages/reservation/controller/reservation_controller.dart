@@ -50,13 +50,13 @@ class ReservationController extends GetxController with BaseController {
   }
 
   Future hitApiToGetTractorList() async {
-    showLoading("Loading");
+    // showLoading("Loading");
     Map<String, dynamic> map = {};
     map['records_per_page'] = 10;
     map['page_no'] = tractorPage.value;
 
     await iHomeRepository?.getAllTractorList(map: map).then((value) {
-      hideLoading();
+      // hideLoading();
       if (value != null && value.data != null) {
         tractorDetailDataModel = value.data;
 
@@ -74,7 +74,7 @@ class ReservationController extends GetxController with BaseController {
         tractorList?.refresh();
       }
     }).onError((error, stackTrace) {
-      hideLoading();
+      // hideLoading();
       showToast(error?.toString());
     });
   }

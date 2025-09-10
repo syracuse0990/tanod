@@ -9,14 +9,23 @@ import '../profile/profile_page.dart';
 import 'controller/dishboard_controller.dart';
 
 class DashBoardPage extends GetView<DashboardController> {
+  
   DashBoardPage({super.key}) {
     // controller. iProfileRepository = Get.put(RemoteIProfileProvider());
     print("on init called  DashBoardPage");
   }
 
-  final List<Widget> _pages = [
+  
+
+  final RxInt _selectedIndex = 0.obs;
+
+  @override
+  Widget build(BuildContext context) {
+    final role = box.read(roleType);
+
+    final List<Widget> _pages = [
     MapHomeScreen(),
-    ListPage(),
+     if (role != APIEndpoint.userRole) ListPage(),
 
     //  SizedBox(),
     // ListPage(),
@@ -24,11 +33,7 @@ class DashBoardPage extends GetView<DashboardController> {
     // const MaintenancePageView(),
     ProfilePage(),
   ];
-
-  final RxInt _selectedIndex = 0.obs;
-
-  @override
-  Widget build(BuildContext context) {
+    
     return WillPopScope(
       onWillPop: () {
         return Future(() => false);
@@ -73,25 +78,28 @@ class DashBoardPage extends GetView<DashboardController> {
                             BlendMode.srcIn),
                       ),
                       label: 'Home'),
+                 if (role != APIEndpoint.userRole)
                   BottomNavigationBarItem(
-                      icon: SvgPicture.asset(
-                        AppSvgAssets.list,
-                        height: 23.h,
-                        colorFilter: ColorFilter.mode(
-                            _selectedIndex.value == 1
-                                ? AppColors.primary
-                                : AppColors.lightGray,
-                            BlendMode.srcIn),
-                      ),
-                      label: 'List'),
+                    icon: SvgPicture.asset(
+                      AppSvgAssets.list,
+                      height: 23.h,
+                      colorFilter: ColorFilter.mode(
+                          _selectedIndex.value == (role != APIEndpoint.userRole ? 1 : 0)
+                              ? AppColors.primary
+                              : AppColors.lightGray,
+                          BlendMode.srcIn),
+                    ),
+                    label: 'List',
+                  ),
                   BottomNavigationBarItem(
                       icon: SvgPicture.asset(
                         AppSvgAssets.alerts,
                         height: 25.h,
                         colorFilter: ColorFilter.mode(
-                            _selectedIndex.value == 2
-                                ? AppColors.primary
-                                : AppColors.lightGray,
+                            _selectedIndex.value ==
+                                (role != APIEndpoint.userRole ? 2 : 1) // adjust index
+                            ? AppColors.primary
+                            : AppColors.lightGray,
                             BlendMode.srcIn),
                       ),
                       label: 'Alert'),
@@ -100,9 +108,10 @@ class DashBoardPage extends GetView<DashboardController> {
                         AppSvgAssets.profile,
                         height: 25.h,
                         colorFilter: ColorFilter.mode(
-                            _selectedIndex.value == 3
-                                ? AppColors.primary
-                                : AppColors.lightGray,
+                            _selectedIndex.value ==
+                                  (role != APIEndpoint.userRole ? 3 : 2) // adjust index
+                              ? AppColors.primary
+                              : AppColors.lightGray,
                             BlendMode.srcIn),
                       ),
                       label: 'Profile'),

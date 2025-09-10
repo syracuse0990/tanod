@@ -51,23 +51,23 @@ class AddUpdateFeedbackView extends GetWidget<FeedbackController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TractorText(text: 'Name'),
+              // const TractorText(text: 'Name'),
               TractorTextfeild(
                 controller: controller.nameController,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.name,
-                hint: 'Your Name',
+                hint: 'Name',
               ),
               AddSpace.vertical(30.h),
-              const TractorText(text: 'Email'),
+              // const TractorText(text: 'Email'),
               TractorTextfeild(
                 controller: controller.emailController,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
-                hint: 'Your Email',
+                hint: 'Email',
               ),
               AddSpace.vertical(30.h),
-              const TractorText(text: 'Issue Type'),
+              // const TractorText(text: 'Issue Type'),
               Obx(
                 () => TractorTextfeild(
                   isSufix: true,

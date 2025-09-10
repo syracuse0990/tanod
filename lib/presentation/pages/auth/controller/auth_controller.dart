@@ -315,9 +315,9 @@ class AuthController extends GetxController with BaseController {
     } else if (!GetUtils.isEmail(emailC.text)) {
       handleError('Please Enter Valid Email', () {}, isBack: false);
       return false;
-    } else if (otpC.text.isEmpty) {
-      handleError('Please Enter Valid Otp', () {}, isBack: false);
-      return false;
+    // } else if (otpC.text.isEmpty) {
+    //   handleError('Please Enter Valid Otp', () {}, isBack: false);
+    //   return false;
     } else if (passwordC.text.length < 8) {
       handleError("Password! At Least 8 Characters ", () {}, isBack: false);
       return false;

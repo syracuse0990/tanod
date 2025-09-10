@@ -158,7 +158,7 @@ class MapHomeScreenState extends State<MapHomeScreen> {
 
   Future hitApiToGetAcceptedBookings() async {
     try {
-      showLoading();
+      // showLoading();
       await iMapRepository?.getAllHomeDevices().then((value) {
         if (value.data != null) {
           dataList?.clear();
@@ -175,7 +175,7 @@ class MapHomeScreenState extends State<MapHomeScreen> {
       });
     } catch (e) {
       hideLoading();
-      print("check all exceptions ${e}");
+      print("check all dex exceptions ${e}");
     }
 
     return;

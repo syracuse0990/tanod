@@ -26,7 +26,7 @@ class AddUpdateTicketView extends GetView<TicketController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TractorText(text: 'Title'),
+              // const TractorText(text: 'Title'),
               TractorTextfeild(
                 controller: controller.titleController,
                 textInputAction: TextInputAction.next,
@@ -88,13 +88,12 @@ class AddUpdateTicketView extends GetView<TicketController> {
                 text: controller.isUpdating.isTrue
                     ? AppStrings.update
                     : AppStrings.save,
-                onTap: () {
+                onTap: () async {
+                  
+                 await controller.createTicket();
+                  showToast(message: "Ticket has been sent successfully.");
                   Get.back();
-                  // if (controller.isUpdating.isTrue) {
-                  //   controller.hitApiToUpdateFeedback(id: controller.updatingId.value,index: controller.selectedIndex.value );
-                  // } else {
-                  //   controller.hitApiToCreateFeedback();
-                  // }
+                  await controller.loadTickets();
                 },
               ),
               AddSpace.vertical(20.h),
