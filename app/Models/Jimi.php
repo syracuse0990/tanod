@@ -97,8 +97,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceList();
+                $this->getToken();
+                return $this->getDeviceList();
             }
             return $e->getMessage();
         }
@@ -144,8 +144,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceDetail($imei);
+                $this->getToken();
+                return $this->getDeviceDetail($imei);
             }
             $response['code'] = $e->getCode();
             $response['message'] = $e->getMessage();
@@ -195,8 +195,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceLocationList();
+                $this->getToken();
+                return $this->getDeviceLocationList();
             }
             return $e->getMessage();
         }
@@ -243,10 +243,9 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceLocation($imeis);
+                $this->getToken();
+                return $this->getDeviceLocation($imeis);
             }
-            $this->getDeviceLocation($imeis);
             return $e->getMessage();
         }
     }
@@ -291,8 +290,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getSharingLocationUrl($imei);
+                $this->getToken();
+                return $this->getSharingLocationUrl($imei);
             }
             return $e->getMessage();
         }
@@ -339,8 +338,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->updateExpiration($imei_list, $new_expiration);
+                $this->getToken();
+                return $this->updateExpiration($imei_list, $new_expiration);
             }
             return $e->getMessage();
         }
@@ -390,8 +389,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceMilage($imeis, $begin_time, $end_time);
+                $this->getToken();
+                return $this->getDeviceMilage($imeis, $begin_time, $end_time);
             }
             return $e->getMessage();
         }
@@ -440,8 +439,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
              if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceTrackData($imei, $begin_time, $end_time);
+                $this->getToken();
+                return $this->getDeviceTrackData($imei, $begin_time, $end_time);
             }
             if ($e->getCode() == 500) {
                 return [
@@ -493,8 +492,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->updateVehicleInfo($imei);
+                $this->getToken();
+                return $this->updateVehicleInfo($imei);
             }
             return $e->getMessage();
         }
@@ -544,8 +543,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->getDeviceMediaUrl($imei, $camera, $media_type, $page_no = 0, $page_size = 10);
+                $this->getToken();
+                return $this->getDeviceMediaUrl($imei, $camera, $media_type, $page_no, $page_size);
             }
             return $e->getMessage();
         }
@@ -699,8 +698,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->createGeoFence($imei, $fence_name, $lat, $lng,  $radius, $zoom_level, $alarm_type = 'out', $report_mode = '1', $alarm_switch = 'ON', $map_type = 'GOOGLE');
+                $this->getToken();
+                return $this->createGeoFence($imei, $fence_name, $lat, $lng, $radius, $alarm_type, $report_mode, $alarm_switch, $map_type, $zoom_level);
             }
             $errorData['code'] = $e->getCode();
             $errorData['message'] = $e->getMessage();
@@ -749,8 +748,8 @@ class Jimi extends Model
             return $response;
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
-                $this->getToken(true);
-                $this->deleteGeoFence($imei, $instruct_no);
+                $this->getToken();
+                return $this->deleteGeoFence($imei, $instruct_no);
             }
             $errorData['code'] = $e->getCode();
             $errorData['message'] = $e->getMessage();
